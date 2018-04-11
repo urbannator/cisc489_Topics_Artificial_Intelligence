@@ -1,0 +1,37 @@
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.row {
+    margin-top: 25px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#wrapper {
+    width: 100%;
+}
+
+#main-content {
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    border: 2px solid gray;
+    width: 500px;
+    height: 525px;
+}
+
+#clusters span {
+    margin-left: 15px;
+}
+
+#start-button {
+    width: 100px;
+    margin: 0 auto;
+}
