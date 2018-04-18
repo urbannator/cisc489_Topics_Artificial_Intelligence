@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient, HttpResponse} from '@angular/common/http';
+
 
 @Component({
     selector: 'app-root',
@@ -16,12 +18,17 @@ export class AppComponent {
     file: File;
     base64String: string;
 
+    imgLink: string;
+
+    constructor(private http: HttpClient) {
+
+    }
+
     onChange(event: EventTarget) {
         const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
         const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
         const files: FileList = target.files;
         this.file = files[0];
-        console.log(this.file);
 
         const reader = new FileReader();
 
@@ -32,13 +39,33 @@ export class AppComponent {
 
     _handleReaderLoaded(readerEvt) {
         const binaryString = readerEvt.target.result;
-        this.base64String =  btoa(binaryString);
-
-        console.log(this.base64String);
+        this.base64String = btoa(binaryString);
     }
 
     start(): void {
         console.log('Starting Process');
 
+        this.http.post(
+            'https://api.imgur.com/3/image',
+            `{"image":"${this.base64String}"}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer f9df94903d2c9d902a3e4a0c4ddea86e43965af4'
+                }
+            }
+        ).subscribe((res: HttpResponse<any>) => {
+            console.log('Res', res);
+            console.log('Body', res.data);
+
+            this.imgLink = res.data.link;
+
+            console.log('Link', this.imgLink);
+
+            // parse data and get link
+        });
+
+        // use link we got above in calling the color clusters api
+        console.log('Finished Process');
     }
 }
