@@ -43,8 +43,6 @@ export class AppComponent {
     }
 
     start(): void {
-        console.log('Starting Process');
-
         this.http.post(
             'https://api.imgur.com/3/image',
             `{"image":"${this.base64String}"}`,
@@ -62,6 +60,10 @@ export class AppComponent {
         });
 
         // use link we got above in calling the color clusters api
-        console.log('Finished Process');
+
+        // send request to color clusters api
+        // grab partition images and upload those to imgur
+        // perform other data processing on response?
+        // figure out what to ouput / what we even want to do with this data
     }
 }
