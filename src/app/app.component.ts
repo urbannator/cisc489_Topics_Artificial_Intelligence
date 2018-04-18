@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpResponse} from '@angular/common/http';
-
+import 'rxjs/add/operator/map';
 
 @Component({
     selector: 'app-root',
@@ -54,15 +54,11 @@ export class AppComponent {
                     'Authorization': 'Bearer f9df94903d2c9d902a3e4a0c4ddea86e43965af4'
                 }
             }
-        ).subscribe((res: HttpResponse<any>) => {
-            console.log('Res', res);
-            console.log('Body', res.data);
-
-            this.imgLink = res.data.link;
+        )
+        .subscribe((res: HttpResponse<any>) => {
+            this.imgLink = res['data']['link'];
 
             console.log('Link', this.imgLink);
-
-            // parse data and get link
         });
 
         // use link we got above in calling the color clusters api
