@@ -12,60 +12,37 @@
                 Number of Clusters:
             </div>
             <div class="col-6 left">
-
-                <input type="radio" name="cluster" value="2" checked="checked">
-                <span>2</span>
-                <br>
-                <input type="radio" name="cluster" value="3">
-                <span>3</span>
-                <br>
-                <input type="radio" name="cluster" value="4">
-                <span>4</span>
-                <br>
-                <input type="radio" name="cluster" value="5">
-                <span>5</span>
-                <br>
-                <input type="radio" name="cluster" value="6">
-                <span>6</span>
-                <br>
-                <input type="radio" name="cluster" value="7">
-                <span>7</span>
-                <br>
-                <input type="radio" name="cluster" value="8">
-                <span>8</span>
-                <br>
-                <input type="radio" name="cluster" value="9">
-                <span>9</span>
-                <br>
-                <input type="radio" name="cluster" value="10">
-                <span>10</span>
-                <br>
+                <div *ngFor="let clustersEntry of clustersEntries; let clustersIDX = index">
+                    <td>
+                        <input type="radio" 
+                        name="clustersRadioGroup" 
+                        (change)="onSelectionClustersChange(clustersEntry)" 
+                        [checked]="(clustersIDX === 0)" 
+                        [value]="clustersEntry.id">
+                    </td>
+                    <td>{{ clustersEntry.description }}</td>
+                </div>      
             </div>
 
         </div>
 
+        
+
         <div id="precision" class="row">
             <div class="col-6 right">
-                Precision
+                Precision:
             </div>
             <div class="col-6 left">
-
-                <input type="radio" name="precision" value="50" checked="checked">
-                <span>vlow (50 px)</span>
-                <br>
-                <input type="radio" name="precision" value="75">
-                <span>low (75 px)</span>
-                <br>
-                <input type="radio" name="precision" value="100">
-                <span>medium (100 px)</span>
-                <br>
-                <input type="radio" name="precision" value="150">
-                <span>high (150 px)</span>
-                <br>
-                <input type="radio" name="precision" value="200">
-                <span>vhigh (200 px)</span>
-                <br>
-
+                <div *ngFor="let precisionEntry of precisionEntries; let precisionIDX = index">
+                    <td>
+                        <input type="radio" 
+                        name="precisionRadioGroup" 
+                        (change)="onSelectionPercisionChange(precisionEntry)" 
+                        [checked]="(precisionIDX === 0)" 
+                        [value]="precisionEntry.id">
+                    </td>
+                    <td>{{ precisionEntry.description }}</td>
+                </div>
             </div>
 
         </div>

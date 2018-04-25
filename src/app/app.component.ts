@@ -23,6 +23,104 @@ export class AppComponent {
     constructor(private http: HttpClient) {
 
     }
+    precisionEntries = [];
+    selectedPrecisionEntry: { [key: string]: any } = {
+        value: null,
+        description: null
+    };
+
+    clustersEntries = [];
+    selectedClustersEntry: { [key: string]: any } = {
+        value: null,
+        description: null
+    };
+   
+    ngOnInit() {
+        this.precisionEntries = [
+          {
+            description: 'vlow (50 px)',
+            id: 'vlow'
+          },
+          {
+            description: 'low (75 px)',
+            id: 'low'
+          },
+          {
+            description: 'medium (100 px)',
+            id: 'medium'
+          },
+          {
+            description: 'high (150 px)',
+            id: 'high'
+          },
+          {
+            description: 'vhigh (200 px)',
+            id: 'vhigh'
+          }
+        ];
+        
+        // select the first one
+        if(this.precisionEntries) {
+          this.onSelectionPercisionChange(this.precisionEntries[0]);  
+        }
+
+        this.clustersEntries = [
+            {
+              description: '2',
+              id: 2
+            },
+            {
+              description: '3',
+              id: 3
+            },
+            {
+              description: '4',
+              id: 4
+            },
+            {
+              description: '5',
+              id: 5
+            },
+            {
+              description: '6',
+              id: 6
+            },
+            {
+              description: '7',
+              id: 7
+            },
+            {
+              description: '8',
+              id: 8
+            },
+            {
+              description: '9',
+              id: 9
+            },
+            {
+              description: '10',
+              id: 10
+            }
+            ];
+          
+          // select the first one
+          if(this.clustersEntries) {
+            this.onSelectionClustersChange(this.clustersEntries[0]);  
+          }
+      }
+    
+    //event handler for the Percision radio button's change event
+    onSelectionPercisionChange(precisionEntry) {
+        // clone the object for immutability
+        this.selectedPrecisionEntry = Object.assign({}, this.selectedPrecisionEntry, precisionEntry);
+    }
+
+    //event handler for the Clusters radio button's change event
+    onSelectionClustersChange(clustersEntry) {
+        // clone the object for immutability
+        this.selectedClustersEntry = Object.assign({}, this.selectedClustersEntry, clustersEntry);
+    }
+        
 
     onChange(event: EventTarget) {
         const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
@@ -43,6 +141,7 @@ export class AppComponent {
     }
 
     start(): void {
+        
         this.http.post(
             'https://api.imgur.com/3/image',
             `{"image":"${this.base64String}"}`,
@@ -56,8 +155,17 @@ export class AppComponent {
         .subscribe((res: HttpResponse<any>) => {
             this.imgLink = res['data']['link'];
 
+            //link that is returned from imgur
             console.log('Link', this.imgLink);
+
+            var websitestring = "http://mkweb.bcgsc.ca/color-summarizer/?url=" + 
+            this.imgLink + "&precision=" + this.selectedPrecisionEntry.id+ 
+            "&num_clusters="+ this.selectedClustersEntry.id;
+
+        
+            console.log('website', websitestring);
         });
+
 
         // use link we got above in calling the color clusters api
 
