@@ -1,0 +1,8 @@
+{
+    "/color-summarizer/*": {
+        "target": "http://mkweb.bcgsc.ca",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
