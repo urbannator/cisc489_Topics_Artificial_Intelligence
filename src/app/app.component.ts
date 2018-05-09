@@ -158,13 +158,15 @@ export class AppComponent implements OnInit {
                 // link that is returned from imgur
                 console.log('Link', this.imgLink);
 
-                const websiteString = '/color-summarizer/?url=' +
+                const websiteString = 'http://mkweb.bcgsc.ca/color-summarizer/?url=' +
                     this.imgLink + '&precision=' + this.selectedPrecisionEntry.id +
                     '&num_clusters=' + this.selectedClustersEntry.id + '&html=1';
 
-                this.http.get(websiteString, {responseType: 'text'}).subscribe((clusterRes: any) => {
-                    console.log(clusterRes);
-                });
+                console.log(websiteString);
+                // this.http.get(websiteString, { responseType: 'text' }).subscribe((clusterRes: any) => {
+                //     console.log(clusterRes);
+                // });
+                window.open(websiteString, 'blank');
             });
 
 
@@ -175,4 +177,5 @@ export class AppComponent implements OnInit {
         // perform other data processing on response?
         // figure out what to ouput / what we even want to do with this data
     }
+
 }
