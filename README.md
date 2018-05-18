@@ -4,6 +4,9 @@ CISC489 Project
 
 Color Clustering of images to find highest ice density in photo of Mars' surface
 
+Link to presentation poster:
+- https://docs.google.com/presentation/d/1eMQ4xxRQpvhbzJIjZ8Mkmeow91TB82vqmymQuS1zM9o/edit?usp=sharing
+
 ## Submission Details - 
 
 Photos acquired from this dataset:
